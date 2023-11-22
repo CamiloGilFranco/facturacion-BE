@@ -176,31 +176,6 @@ module.exports = {
     }
   },
 
-  async updateInvoice(req, res) {
-    try {
-      await pool.query("UPDATE cliente SET ? WHERE ID_CLIENTE = ?", [
-        req.body,
-        req.params.id,
-      ]);
-
-      const [result] = await pool.query(
-        "SELECT * FROM cliente WHERE id = ?",
-        req.params.id
-      );
-
-      res.status(200).json({
-        message: "client updated",
-        result: result[0],
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({
-        message: "client couldn't be updated",
-        data: error.message,
-      });
-    }
-  },
-
   async deleteInvoice(req, res) {
     try {
       const { id } = req.params;
